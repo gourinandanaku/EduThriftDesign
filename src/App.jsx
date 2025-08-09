@@ -12,10 +12,10 @@ import Add from "./components/Add.jsx";
 function Addp() {
   return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>Add Product Page</h2>;
 }
-function Product() {
+function Productv() {
   return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>Product Page</h2>;
 }
-function Profile() {
+function Profilev() {
   return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>Profile Page</h2>;
 }
 
@@ -27,8 +27,12 @@ function App() {
       <Route path="/" element={<Loginpage setUserRole={setUserRole} />} />
       <Route path="/home" element={<Home />} />
       <Route path="/add" element={<Add />} />
-      <Route path="/product" element={<Product />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/addproduct" element={<Addp />} />
+      <Route path="/login" element={<Loginpage />} />
+      <Route path="/addproduct" element={<Addp />} />
+      
+      <Route path="/product" element={<Productv />} />
+      <Route path="/profile" element={<Profilev />} />
       <Route path="/admin" element={<AdminHome/>} />
       <Route path="/adduser" element={<Adduser/> }/>
       {/* Add more routes as needed */}
