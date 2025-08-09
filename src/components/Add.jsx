@@ -47,10 +47,10 @@ export default function Add() {
       image,
     };
 
-    const existingProducts =
-      JSON.parse(localStorage.getItem("products")) || [];
-    existingProducts.push(newProduct);
-    localStorage.setItem("products", JSON.stringify(existingProducts));
+    const existing = JSON.parse(localStorage.getItem("products")) || [];
+existing.push(newProduct);
+localStorage.setItem("products", JSON.stringify(existing));
+
 
     alert("Product added successfully!");
 
