@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+// import { text } from 'stream/consumers';
 
 const drawerWidth = 220;
 
@@ -43,6 +44,7 @@ export default function AdminHome() {
     { text: 'Add Product', path: '/add' },
     { text: 'Product', path: '/product' },
     { text: 'Profile', path: '/profile' },
+    {text: 'Adduser', path: '/adduser'  }
 
   ];
 
