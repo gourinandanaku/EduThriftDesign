@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   Box, Typography, Paper, Drawer, List, ListItem, 
   ListItemButton, ListItemText, Toolbar, AppBar 
@@ -37,7 +38,7 @@ export default function Home() {
     localStorage.removeItem('role');
     localStorage.removeItem('email');
     navigate('/');
-  };
+  }
 
   const navItems = [
     { text: 'Add Product', path: '/add' },

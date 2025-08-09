@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, TextField, Button, Typography, Paper } from "@mui/material";
@@ -32,7 +33,7 @@ export default function LoginPage() {
   } else {
     alert("Invalid email or password");
   }
-};
+}
 
 
   return (

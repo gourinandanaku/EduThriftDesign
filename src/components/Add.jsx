@@ -1,3 +1,4 @@
+import React from 'react';
 import React, { useState } from "react";
 import {
   Box,
@@ -26,10 +27,10 @@ export default function Add() {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
-      };
+      }
       reader.readAsDataURL(file);
     }
-  };
+  }
 
   const handleAddProduct = () => {
     const newProduct = {
@@ -43,7 +44,7 @@ export default function Add() {
       contactNumber,
       extraField, // Store new field value
       image,
-    };
+    }
 
     const existingProducts =
       JSON.parse(localStorage.getItem("products")) || [];
@@ -51,7 +52,7 @@ export default function Add() {
     localStorage.setItem("products", JSON.stringify(existingProducts));
 
     alert("Product added successfully!");
-  };
+  }
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>

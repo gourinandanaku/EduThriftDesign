@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardMedia, Button, Typography } from "@mui/material";
 
@@ -13,7 +14,7 @@ export default function Products() {
 
   const handleConnect = (contactNumber) => {
     alert(`Contact the owner at: ${contactNumber}`);
-  };
+  }
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
