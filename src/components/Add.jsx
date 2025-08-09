@@ -1,5 +1,4 @@
-import React from 'react';
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   TextField,
@@ -8,6 +7,7 @@ import {
   Paper,
   MenuItem,
 } from "@mui/material";
+
 
 export default function Add() {
   const [productName, setProductName] = useState("");
@@ -27,13 +27,14 @@ export default function Add() {
       const reader = new FileReader();
       reader.onload = () => {
         setImage(reader.result);
-      }
+      };
       reader.readAsDataURL(file);
     }
-  }
+  };
 
   const handleAddProduct = () => {
     const newProduct = {
+      id: Date.now(), // Unique ID
       productName,
       description,
       price,
@@ -42,9 +43,9 @@ export default function Add() {
       className,
       department,
       contactNumber,
-      extraField, // Store new field value
+      extraField,
       image,
-    }
+    };
 
     const existingProducts =
       JSON.parse(localStorage.getItem("products")) || [];
@@ -52,7 +53,19 @@ export default function Add() {
     localStorage.setItem("products", JSON.stringify(existingProducts));
 
     alert("Product added successfully!");
-  }
+
+    // Reset form
+    setProductName("");
+    setDescription("");
+    setPrice("");
+    setState("Available");
+    setOwnerName("");
+    setClassName("");
+    setDepartment("");
+    setContactNumber("");
+    setExtraField("");
+    setImage(null);
+  };
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
@@ -120,6 +133,7 @@ export default function Add() {
         <TextField
           fullWidth
           label="Contact Number"
+          type="tel"
           sx={{ mb: 2 }}
           value={contactNumber}
           onChange={(e) => setContactNumber(e.target.value)}
