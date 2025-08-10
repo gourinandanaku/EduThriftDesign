@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   TextField,
@@ -6,8 +6,8 @@ import {
   Typography,
   Paper,
   MenuItem,
+  Grid,
 } from "@mui/material";
-
 
 export default function Add() {
   const [productName, setProductName] = useState("");
@@ -18,7 +18,7 @@ export default function Add() {
   const [className, setClassName] = useState("");
   const [department, setDepartment] = useState("");
   const [contactNumber, setContactNumber] = useState("");
-  const [extraField, setExtraField] = useState(""); // New text field
+  const [extraField, setExtraField] = useState("");
   const [image, setImage] = useState(null);
 
   const handleImageUpload = (e) => {
@@ -33,8 +33,13 @@ export default function Add() {
   };
 
   const handleAddProduct = () => {
+    if (!productName || !description || !price) {
+      alert("Please fill in Product Name, Description, and Price.");
+      return;
+    }
+
     const newProduct = {
-      id: Date.now(), // Unique ID
+      id: Date.now(),
       productName,
       description,
       price,
@@ -48,9 +53,8 @@ export default function Add() {
     };
 
     const existing = JSON.parse(localStorage.getItem("products")) || [];
-existing.push(newProduct);
-localStorage.setItem("products", JSON.stringify(existing));
-
+    existing.push(newProduct);
+    localStorage.setItem("products", JSON.stringify(existing));
 
     alert("Product added successfully!");
 
@@ -68,104 +72,182 @@ localStorage.setItem("products", JSON.stringify(existing));
   };
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
-      <Paper sx={{ p: 4, width: 400 }}>
-        <Typography variant="h5" gutterBottom>
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#f5f5f5",
+        py: 5,
+        px: { xs: 2, sm: 4, md: 6 },
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flex-start",
+      }}
+    >
+      <Paper
+        elevation={6}
+        sx={{
+          p: { xs: 3, sm: 5 },
+          maxWidth: 600,
+          width: "100%",
+          borderRadius: 3,
+        }}
+      >
+        <Typography
+          variant="h4"
+          align="center"
+          gutterBottom
+          sx={{ fontWeight: "bold", color: "primary.main" }}
+        >
           Add Product
         </Typography>
 
-        <TextField
-          fullWidth
-          label="Product Name"
-          sx={{ mb: 2 }}
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Description"
-          multiline
-          rows={3}
-          sx={{ mb: 2 }}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Price"
-          type="number"
-          sx={{ mb: 2 }}
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          select
-          fullWidth
-          label="State"
-          sx={{ mb: 2 }}
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-        >
-          <MenuItem value="Available">Available</MenuItem>
-          <MenuItem value="Not Available">Not Available</MenuItem>
-        </TextField>
-        <TextField
-          fullWidth
-          label="Owner Name"
-          sx={{ mb: 2 }}
-          value={ownerName}
-          onChange={(e) => setOwnerName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Class"
-          sx={{ mb: 2 }}
-          value={className}
-          onChange={(e) => setClassName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Department"
-          sx={{ mb: 2 }}
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Contact Number"
-          type="tel"
-          sx={{ mb: 2 }}
-          value={contactNumber}
-          onChange={(e) => setContactNumber(e.target.value)}
-        />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Product Name"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              required
+            />
+          </Grid>
 
-        {/* New TextField */}
-        <TextField
-          fullWidth
-          label="Extra Field"
-          sx={{ mb: 2 }}
-          value={extraField}
-          onChange={(e) => setExtraField(e.target.value)}
-        />
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Price (₹)"
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </Grid>
 
-        <Button
-          variant="contained"
-          component="label"
-          sx={{ mb: 2 }}
-        >
-          Upload Image
-          <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
-        </Button>
+          <Grid item xs={12}>
+            <TextField
+              fullWidth
+              label="Description"
+              multiline
+              rows={4}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </Grid>
 
-        {image && (
-          <Box sx={{ mb: 2 }}>
-            <img src={image} alt="Preview" width="100%" />
-          </Box>
-        )}
+          <Grid item xs={12} sm={6}>
+            <TextField
+              select
+              fullWidth
+              label="State"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+            >
+              <MenuItem value="Available">Available</MenuItem>
+              <MenuItem value="Not Available">Not Available</MenuItem>
+            </TextField>
+          </Grid>
 
-        <Button variant="contained" fullWidth onClick={handleAddProduct}>
-          Add Product
-        </Button>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Owner Name"
+              value={ownerName}
+              onChange={(e) => setOwnerName(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Class"
+              value={className}
+              onChange={(e) => setClassName(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Department"
+              value={department}
+              onChange={(e) => setDepartment(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Contact Number"
+              type="tel"
+              value={contactNumber}
+              onChange={(e) => setContactNumber(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              fullWidth
+              label="Extra Field"
+              value={extraField}
+              onChange={(e) => setExtraField(e.target.value)}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <Button
+              variant="outlined"
+              component="label"
+              fullWidth
+              sx={{ height: 45 }}
+            >
+              Upload Image
+              <input
+                type="file"
+                hidden
+                accept="image/*"
+                onChange={handleImageUpload}
+              />
+            </Button>
+          </Grid>
+
+          {image && (
+            <Grid item xs={12}>
+              <Box
+                sx={{
+                  mt: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Box
+                  component="img"
+                  src={image}
+                  alt="Preview"
+                  sx={{
+                    maxHeight: 250,
+                    maxWidth: "100%",
+                    borderRadius: 2,
+                    boxShadow: 3,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+            </Grid>
+          )}
+
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              fullWidth
+              size="large"
+              onClick={handleAddProduct}
+              sx={{ fontWeight: "bold" }}
+            >
+              Add Product
+            </Button>
+          </Grid>
+        </Grid>
       </Paper>
     </Box>
   );
